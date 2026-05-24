@@ -289,7 +289,7 @@
   // Fetch MP3 files from GitHub API
   async function loadSongs() {
     try {
-      const response = await fetch('https://api.github.com/repos/katalyst-argon/katalyst-argon.github.io/contents/');
+      const response = await fetch('https://api.github.com/repos/katalyst-argon/katalyst-argon.github.io/contents/Songs');
       const files = await response.json();
       
       // Filter for MP3 files and extract song info
