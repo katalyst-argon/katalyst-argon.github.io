@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>my songs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080d1a;
+      --surface:   #0e1628;
+      --surface2:  #162038;
+      --border:    #1f2f52;
+      --accent:    #3d6aff;
+      --accent2:   #7099ff;
+      --text:      #d8e0f0;
+      --muted:     #5a6a90;
+      --white:     #f0f4ff;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      min-height: 100vh;
+    }
+
+    body {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    header {
+      margin-bottom: 56px;
+    }
+
+    header h1 {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    header .site-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+
+    .track-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .track {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .track:hover {
+      background: var(--surface2);
+      border-color: #2a3f6a;
+    }
+
+    .track.active {
+      border-color: var(--accent);
+      background: var(--surface2);
+    }
+
+    .track-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .track-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .track-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      min-width: 20px;
+    }
+
+    .play-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .track.active .play-btn,
+    .track:hover .play-btn {
+      border-color: var(--accent);
+    }
+
+    .track.active .play-btn {
+      background: var(--accent);
+    }
+
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 5px 0 5px 9px;
+      border-color: transparent transparent transparent var(--accent2);
+      margin-left: 2px;
+    }
+
+    .track.active .play-icon {
+      border-color: transparent transparent transparent #fff;
+    }
+
+    .pause-icon {
+      display: flex;
+      gap: 3px;
+    }
+    .pause-icon span {
+      width: 3px;
+      height: 11px;
+      background: #fff;
+      border-radius: 1px;
+    }
+
+    .track-info {
+      min-width: 0;
+    }
+
+    .track-title {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .track-duration {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .player-bar {
+      margin-top: 12px;
+      display: none;
+    }
+
+    .track.active .player-bar {
+      display: block;
+    }
+
+    .progress-wrap {
+      position: relative;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .empty {
+      text-align: center;
+      padding: 60px 0;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>music</h1>
+  <div class="site-name">your name here</div>
+</header>
+
+<div class="track-list" id="trackList"></div>
+
+<footer id="footer"></footer>
+
+<audio id="player"></audio>
+
+<script>
+  // ── ADD YOUR SONGS HERE ──────────────────────────────────────────────────
+  // Put your audio files in the same folder as this index.html in your repo.
+  // Then add an entry here:  { title, file, year (optional) }
+  const songs = [
+    { title: "song title one",   file: "song1.mp3",  year: "2024" },
+    { title: "song title two",   file: "song2.mp3",  year: "2024" },
+    { title: "another one",      file: "song3.mp3",  year: "2025" },
+  ];
+  // ─────────────────────────────────────────────────────────────────────────
+
+  const audio    = document.getElementById('player');
+  const list     = document.getElementById('trackList');
+  const footer   = document.getElementById('footer');
+  let   current  = null;
+
+  if (!songs.length) {
+    list.innerHTML = '<div class="empty">no songs yet</div>';
+  }
+
+  songs.forEach((song, i) => {
+    const el = document.createElement('div');
+    el.className = 'track';
+    el.dataset.index = i;
+    el.innerHTML = `
+      <div class="track-header">
+        <div class="track-left">
+          <span class="track-num">${String(i + 1).padStart(2, '0')}</span>
+          <div class="play-btn"><div class="play-icon"></div></div>
+          <div class="track-info">
+            <div class="track-title">${song.title}</div>
+            ${song.year ? `<div class="track-meta">${song.year}</div>` : ''}
+          </div>
+        </div>
+        <span class="track-duration" id="dur-${i}">--:--</span>
+      </div>
+      <div class="player-bar">
+        <div class="progress-wrap" id="pw-${i}">
+          <div class="progress-fill" id="pf-${i}"></div>
+        </div>
+        <div class="time-row">
+          <span id="ct-${i}">0:00</span>
+          <span id="tt-${i}">--:--</span>
+        </div>
+      </div>`;
+
+    el.addEventListener('click', () => toggleTrack(i, el, song));
+
+    const pw = el.querySelector(`#pw-${i}`);
+    pw.addEventListener('click', e => {
+      e.stopPropagation();
+      if (current === i) {
+        audio.currentTime = (e.offsetX / pw.offsetWidth) * audio.duration;
+      }
+    });
+
+    list.appendChild(el);
+
+    const tmp = new Audio(song.file);
+    tmp.addEventListener('loadedmetadata', () => {
+      document.getElementById(`dur-${i}`).textContent = fmt(tmp.duration);
+      document.getElementById(`tt-${i}`).textContent  = fmt(tmp.duration);
+    });
+  });
+
+  function toggleTrack(i, el, song) {
+    if (current === i) {
+      audio.paused ? audio.play() : audio.pause();
+      updateBtn(i);
+      return;
+    }
+    if (current !== null) deactivate(current);
+    current = i;
+    audio.src = song.file;
+    audio.play();
+    el.classList.add('active');
+    updateBtn(i);
+  }
+
+  function deactivate(i) {
+    const el = list.children[i];
+    if (!el) return;
+    el.classList.remove('active');
+    setPlayIcon(el, false);
+  }
+
+  function updateBtn(i) {
+    const el = list.children[i];
+    setPlayIcon(el, !audio.paused);
+  }
+
+  function setPlayIcon(el, playing) {
+    const btn = el.querySelector('.play-btn');
+    btn.innerHTML = playing
+      ? '<div class="pause-icon"><span></span><span></span></div>'
+      : '<div class="play-icon"></div>';
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    if (current === null || !audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    const pf = document.getElementById(`pf-${current}`);
+    const ct = document.getElementById(`ct-${current}`);
+    if (pf) pf.style.width = pct + '%';
+    if (ct) ct.textContent = fmt(audio.currentTime);
+  });
+
+  audio.addEventListener('ended', () => {
+    if (current === null) return;
+    deactivate(current);
+    const next = current + 1;
+    if (next < songs.length) {
+      const el = list.children[next];
+      toggleTrack(next, el, songs[next]);
+    } else {
+      current = null;
+    }
+  });
+
+  audio.addEventListener('pause', () => { if (current !== null) updateBtn(current); });
+  audio.addEventListener('play',  () => { if (current !== null) updateBtn(current); });
+
+  function fmt(s) {
+    if (!s || isNaN(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  footer.textContent = `${songs.length} track${songs.length !== 1 ? 's' : ''}`;
+</script>
+</body>
+</html>
