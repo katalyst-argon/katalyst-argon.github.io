@@ -297,8 +297,8 @@
         .filter(file => file.name.endsWith('.mp3'))
         .map(file => ({
           title: file.name.replace('.mp3', ''),
-          file: file.name,
-          year: '2026' // You can adjust this or parse from filename if needed
+          file: 'Songs/' + file.name,   // ← FIX: prepend the folder name
+          year: '2026'
         }))
         .sort((a, b) => a.title.localeCompare(b.title));
 
@@ -360,7 +360,7 @@
 
       list.appendChild(el);
 
-      const tmp = new Audio(song.file);
+      const tmp = new Audio(song.file);   // ← also correct now, uses Songs/filename
       tmp.addEventListener('loadedmetadata', () => {
         document.getElementById(`dur-${i}`).textContent = fmt(tmp.duration);
         document.getElementById(`tt-${i}`).textContent  = fmt(tmp.duration);
@@ -378,7 +378,7 @@
     }
     if (current !== null) deactivate(current);
     current = i;
-    audio.src = song.file;
+    audio.src = song.file;   // ← correct now, uses Songs/filename
     audio.play();
     el.classList.add('active');
     updateBtn(i);
