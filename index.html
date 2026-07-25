@@ -35,10 +35,7 @@
       min-height: 100vh;
       margin: 0;
       color: var(--text);
-      background:
-        radial-gradient(circle at 10% 0%, rgba(99, 86, 232, 0.19), transparent 32rem),
-        radial-gradient(circle at 95% 20%, rgba(40, 190, 175, 0.09), transparent 26rem),
-        var(--bg);
+      background: var(--bg);
       font-family: 'Manrope', system-ui, sans-serif;
     }
 
@@ -77,9 +74,9 @@
       height: 32px;
       place-items: center;
       border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 10px;
-      background: linear-gradient(135deg, #9385ff, #4dd6c0);
-      box-shadow: 0 7px 24px rgba(99, 86, 232, 0.3);
+      border-radius: 7px;
+      background: var(--accent);
+      box-shadow: none;
     }
 
     .brand-mark svg { width: 17px; height: 17px; fill: #080a12; }
@@ -114,17 +111,7 @@
       50% { opacity: 0.35; transform: scale(0.75); }
     }
 
-    .hero { padding: 82px 0 40px; }
-
-    .eyebrow {
-      margin: 0 0 19px;
-      color: var(--accent-2);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.17em;
-      text-transform: uppercase;
-    }
+    .hero { padding: 88px 0 42px; }
 
     h1 {
       max-width: 700px;
@@ -137,28 +124,14 @@
       line-height: 0.92;
     }
 
-    h1 span {
-      color: transparent;
-      background: linear-gradient(110deg, #a398ff 8%, #6ee2ce 90%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
-    .hero-copy {
-      max-width: 480px;
-      margin: 25px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.7;
-    }
+    h1 span { color: var(--accent-2); }
 
     .library {
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--panel);
+      border-radius: 12px;
+      background: var(--panel-solid);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
     }
 
     .library-toolbar {
@@ -266,21 +239,20 @@
       padding: 13px 16px 15px;
       overflow: hidden;
       border: 1px solid transparent;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.025);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.018);
       cursor: pointer;
-      transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+      transition: background 160ms ease, border-color 160ms ease;
     }
 
     .track:hover {
       border-color: var(--line);
       background: var(--panel-hover);
-      transform: translateY(-1px);
     }
 
     .track.active {
-      border-color: rgba(139, 124, 255, 0.54);
-      background: linear-gradient(105deg, rgba(101, 85, 216, 0.2), rgba(57, 189, 171, 0.06));
+      border-color: rgba(139, 124, 255, 0.62);
+      background: #181c2b;
     }
 
     .track-number {
@@ -316,8 +288,7 @@
     .track.active .play-button, .play-button:hover {
       border-color: transparent;
       background: var(--accent);
-      box-shadow: 0 5px 18px rgba(139, 124, 255, 0.28);
-      transform: scale(1.04);
+      box-shadow: none;
     }
 
     .play-button svg { width: 15px; height: 15px; fill: currentColor; }
@@ -434,11 +405,10 @@
       display: none;
       width: min(920px, calc(100% - 40px));
       margin: 0 auto;
-      border: 1px solid rgba(139, 124, 255, 0.34);
-      border-radius: 18px;
-      background: rgba(17, 21, 36, 0.88);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(20px);
+      border: 1px solid #30395d;
+      border-radius: 10px;
+      background: var(--panel-solid);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
     }
 
     .now-playing.visible { display: block; animation: slide-up 220ms ease both; }
@@ -477,16 +447,42 @@
 
     .now-meta { margin-top: 3px; color: var(--muted); font-size: 10px; }
 
-    .now-progress-wrap { cursor: pointer; }
-
-    .now-progress {
-      height: 4px;
-      overflow: hidden;
-      border-radius: 4px;
-      background: rgba(137, 157, 214, 0.18);
+    .now-progress-wrap {
+      cursor: pointer;
+      user-select: none;
     }
 
-    .now-progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+    .now-progress {
+      position: relative;
+      height: 4px;
+      border-radius: 4px;
+      background: rgba(137, 157, 214, 0.18);
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .now-progress:active { cursor: grabbing; }
+
+    .now-progress-fill {
+      position: relative;
+      width: 0;
+      height: 100%;
+      border-radius: 4px;
+      background: var(--accent-2);
+    }
+
+    .now-progress-fill::after {
+      position: absolute;
+      top: 50%;
+      right: -6px;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--panel-solid);
+      border-radius: 50%;
+      background: var(--accent-2);
+      content: '';
+      transform: translateY(-50%);
+    }
 
     .now-times {
       display: flex;
@@ -498,7 +494,7 @@
     }
 
     .now-play { width: 38px; height: 38px; border-color: transparent; background: var(--accent); }
-    .now-play:hover { background: #9b8eff; transform: scale(1.05); }
+    .now-play:hover { background: #9b8eff; }
     .now-play svg { width: 15px; height: 15px; fill: currentColor; }
     .now-play .pause-svg { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
 
@@ -536,9 +532,7 @@
     </nav>
 
     <header class="hero">
-      <p class="eyebrow">music / original songs</p>
       <h1>exo's <span>songs.</span></h1>
-      <p class="hero-copy">A small collection of sounds, sketches, and finished pieces. Press play and stay awhile.</p>
     </header>
 
     <section class="library" aria-label="Song library">
@@ -606,6 +600,7 @@
     const nowMeta = document.getElementById('nowMeta');
     const nowPlay = document.getElementById('nowPlay');
     const nowProgressWrap = document.getElementById('nowProgressWrap');
+    const nowProgress = nowProgressWrap.querySelector('.now-progress');
     const nowProgressFill = document.getElementById('nowProgressFill');
     const nowCurrent = document.getElementById('nowCurrent');
     const nowTotal = document.getElementById('nowTotal');
@@ -807,7 +802,22 @@
       else audio.pause();
     });
 
-    nowProgressWrap.addEventListener('click', event => seekFrom(event, nowProgressWrap));
+    let isSeeking = false;
+
+    nowProgress.addEventListener('click', event => seekFrom(event, nowProgress));
+    nowProgress.addEventListener('pointerdown', event => {
+      if (!currentSong || !Number.isFinite(audio.duration)) return;
+      event.preventDefault();
+      isSeeking = true;
+      nowProgress.setPointerCapture?.(event.pointerId);
+      seekFrom(event, nowProgress);
+    });
+    nowProgress.addEventListener('pointermove', event => {
+      if (isSeeking) seekFrom(event, nowProgress);
+    });
+    nowProgress.addEventListener('pointerup', () => { isSeeking = false; });
+    nowProgress.addEventListener('pointercancel', () => { isSeeking = false; });
+
     nowProgressWrap.addEventListener('keydown', event => {
       if (!currentSong || !Number.isFinite(audio.duration)) return;
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
@@ -873,5 +883,15 @@
 
     loadSongs();
   </script>
+</body>
+</html>
+  }
+    }
+
+    loadSongs();
+  </script>
+</body>
+</html>
+script>
 </body>
 </html>
