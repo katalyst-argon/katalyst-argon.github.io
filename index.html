@@ -43,7 +43,52 @@
     button, a { -webkit-tap-highlight-color: transparent; }
     button { color: inherit; }
 
+    .stars {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .stars::before {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.78) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(150, 174, 255, 0.52) 0 1px, transparent 1.5px);
+      background-position: 8px 12px, 92px 54px;
+      background-size: 137px 119px, 211px 173px;
+      content: '';
+      opacity: 0.38;
+    }
+
+    .shooting-star {
+      position: absolute;
+      top: -10%;
+      left: 10%;
+      width: 110px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+      opacity: 0;
+      transform: rotate(-32deg);
+      animation: shooting-star 9s linear infinite;
+    }
+
+    .shooting-star:nth-child(2) { left: 46%; animation-delay: 2.4s; animation-duration: 12s; }
+    .shooting-star:nth-child(3) { left: 78%; animation-delay: 5.2s; animation-duration: 10s; }
+    .shooting-star:nth-child(4) { left: 28%; animation-delay: 7.1s; animation-duration: 14s; }
+    .shooting-star:nth-child(5) { left: 91%; animation-delay: 9s; animation-duration: 11s; }
+
+    @keyframes shooting-star {
+      0%, 70% { opacity: 0; transform: translate(0, 0) rotate(-32deg); }
+      74% { opacity: 0.85; }
+      88%, 100% { opacity: 0; transform: translate(-370px, 520px) rotate(-32deg); }
+    }
+
     .page {
+      position: relative;
+      z-index: 1;
       width: min(100% - 40px, 960px);
       margin: 0 auto;
       padding: 30px 0 150px;
@@ -420,14 +465,33 @@
 
     .now-inner {
       display: grid;
-      grid-template-columns: minmax(160px, 0.75fr) minmax(240px, 1fr) auto;
+      grid-template-columns: 72px minmax(0, 1fr);
       align-items: center;
-      gap: 24px;
-      padding: 14px 17px;
+      gap: 16px;
+      padding: 12px 16px;
     }
 
+    .now-artwork {
+      display: grid;
+      width: 72px;
+      height: 72px;
+      overflow: hidden;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+      color: var(--faint);
+      background: #0b0e18;
+    }
+
+    .now-artwork svg { width: 25px; height: 25px; fill: currentColor; }
+    .now-artwork img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    .now-content { min-width: 0; }
+
+    .now-copy { min-width: 0; }
+
     .now-label {
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       color: var(--accent-2);
       font-family: 'Space Grotesk', sans-serif;
       font-size: 9px;
@@ -448,6 +512,7 @@
     .now-meta { margin-top: 3px; color: var(--muted); font-size: 10px; }
 
     .now-progress-wrap {
+      margin-top: 10px;
       cursor: pointer;
       user-select: none;
     }
@@ -487,16 +552,63 @@
     .now-times {
       display: flex;
       justify-content: space-between;
-      margin-top: 6px;
+      margin-top: 5px;
       color: var(--faint);
       font-family: 'Space Grotesk', sans-serif;
       font-size: 10px;
     }
 
-    .now-play { width: 38px; height: 38px; border-color: transparent; background: var(--accent); }
-    .now-play:hover { background: #9b8eff; }
+    .now-controls {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 9px;
+    }
+
+    .player-control, .now-play {
+      display: grid;
+      width: 27px;
+      height: 27px;
+      padding: 0;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 160ms ease, background 160ms ease;
+    }
+
+    .player-control:hover, .player-control.is-active { color: var(--text); background: rgba(139, 124, 255, 0.14); }
+    .player-control svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+
+    .now-play {
+      width: 34px;
+      height: 34px;
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .now-play:hover { color: #fff; background: #9b8eff; }
     .now-play svg { width: 15px; height: 15px; fill: currentColor; }
     .now-play .pause-svg { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 6px;
+    }
+
+    .volume-control input[type="range"] {
+      width: 82px;
+      height: 4px;
+      accent-color: var(--accent-2);
+      cursor: pointer;
+    }
+
+    .download-control { margin-left: auto; }
 
     @media (max-width: 650px) {
       .page { width: min(100% - 28px, 960px); padding-top: 20px; }
@@ -510,8 +622,13 @@
       .download { width: 30px; height: 30px; }
       .track-progress { right: 11px; left: 11px; }
       .now-playing { right: 14px; bottom: 14px; left: 14px; width: calc(100% - 28px); }
-      .now-inner { grid-template-columns: 1fr auto; gap: 12px 16px; }
-      .now-progress-wrap { grid-column: 1 / -1; grid-row: 2; }
+      .now-inner { grid-template-columns: 58px minmax(0, 1fr); gap: 11px; padding: 10px 11px; }
+      .now-artwork { width: 58px; height: 58px; }
+      .now-progress-wrap { margin-top: 8px; }
+      .now-controls { gap: 5px; margin-top: 7px; }
+      .volume-control { margin-left: 2px; }
+      .volume-control input[type="range"] { width: 58px; }
+      .download-control { margin-left: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -520,6 +637,13 @@
   </style>
 </head>
 <body>
+  <div class="stars" aria-hidden="true">
+    <span class="shooting-star"></span>
+    <span class="shooting-star"></span>
+    <span class="shooting-star"></span>
+    <span class="shooting-star"></span>
+    <span class="shooting-star"></span>
+  </div>
   <main class="page">
     <nav class="topbar" aria-label="Site navigation">
       <a class="brand" href="./" aria-label="exo's songs home">
@@ -563,18 +687,43 @@
 
   <section class="now-playing" id="nowPlaying" aria-label="Now playing">
     <div class="now-inner">
-      <div class="now-copy">
-        <div class="now-label">Now playing</div>
-        <div class="now-title" id="nowTitle">—</div>
-        <div class="now-meta" id="nowMeta">—</div>
+      <div class="now-artwork" id="nowArtwork" aria-label="Album artwork">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.4v10.2a3.2 3.2 0 1 1-1.5-2.7V7.1l10-2.5v9.9a3.2 3.2 0 1 1-1.5-2.7V2.7L8.5 5.4Z"></path></svg>
       </div>
-      <div class="now-progress-wrap" id="nowProgressWrap" role="slider" aria-label="Song progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-        <div class="now-progress"><div class="now-progress-fill" id="nowProgressFill"></div></div>
-        <div class="now-times"><span id="nowCurrent">0:00</span><span id="nowTotal">—:—</span></div>
+      <div class="now-content">
+        <div class="now-copy">
+          <div class="now-label">Now playing</div>
+          <div class="now-title" id="nowTitle">—</div>
+          <div class="now-meta" id="nowMeta">—</div>
+        </div>
+        <div class="now-progress-wrap" id="nowProgressWrap" role="slider" aria-label="Song progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+          <div class="now-progress"><div class="now-progress-fill" id="nowProgressFill"></div></div>
+          <div class="now-times"><span id="nowCurrent">0:00</span><span id="nowTotal">—:—</span></div>
+        </div>
+        <div class="now-controls" aria-label="Playback controls">
+          <button class="player-control" id="prevSong" type="button" aria-label="Previous song">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 6l-9 6 9 6V6Z"></path></svg>
+          </button>
+          <button class="now-play" id="nowPlay" type="button" aria-label="Play">
+            <svg class="play-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5Z"></path></svg>
+          </button>
+          <button class="player-control" id="nextSong" type="button" aria-label="Next song">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 6l9 6-9 6V6Z"></path></svg>
+          </button>
+          <button class="player-control" id="loopSong" type="button" aria-label="Loop off" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5h2a2 2 0 0 1 2 2v3M7 19H5a2 2 0 0 1-2-2v-3M19 5l-3 3M5 19l3-3M7 8h8a4 4 0 0 1 4 4M17 16H9a4 4 0 0 1-4-4"></path></svg>
+          </button>
+          <div class="volume-control">
+            <button class="player-control volume-button" id="volumeButton" type="button" aria-label="Mute">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"></path><path class="volume-wave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"></path></svg>
+            </button>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.85" aria-label="Volume" />
+          </div>
+          <a class="player-control download-control" id="nowDownload" href="#" download aria-label="Download song">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M5 20h14"></path></svg>
+          </a>
+        </div>
       </div>
-      <button class="now-play" id="nowPlay" type="button" aria-label="Play">
-        <svg class="play-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5Z"></path></svg>
-      </button>
     </div>
   </section>
 
@@ -604,10 +753,21 @@
     const nowProgressFill = document.getElementById('nowProgressFill');
     const nowCurrent = document.getElementById('nowCurrent');
     const nowTotal = document.getElementById('nowTotal');
+    const nowArtwork = document.getElementById('nowArtwork');
+    const nowDownload = document.getElementById('nowDownload');
+    const previousButton = document.getElementById('prevSong');
+    const nextButton = document.getElementById('nextSong');
+    const loopButton = document.getElementById('loopSong');
+    const volumeButton = document.getElementById('volumeButton');
+    const volumeSlider = document.getElementById('volumeSlider');
 
     let songs = [];
     let currentSong = null;
     let searchTerm = '';
+    let loopEnabled = false;
+    let lastVolume = Number(volumeSlider.value) || 0.85;
+    let tagsLoader = null;
+    audio.volume = lastVolume;
 
     function escapeHTML(value) {
       return String(value).replace(/[&<>'"]/g, char => ({
@@ -727,13 +887,89 @@
         const button = track.querySelector('.play-button');
         if (button) setButtonIcon(button, Boolean(active && !audio.paused));
       });
+      setButtonIcon(nowPlay, Boolean(currentSong && !audio.paused));
+    }
+
+    const placeholderArtwork = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.4v10.2a3.2 3.2 0 1 1-1.5-2.7V7.1l10-2.5v9.9a3.2 3.2 0 1 1-1.5-2.7V2.7L8.5 5.4Z"></path></svg>';
+
+    function setArtwork(song) {
+      nowArtwork.replaceChildren();
+      if (!song.artwork) {
+        nowArtwork.innerHTML = placeholderArtwork;
+        return;
+      }
+      const image = new Image();
+      image.alt = `${song.title} album artwork`;
+      image.src = song.artwork;
+      nowArtwork.appendChild(image);
+    }
+
+    function updateNowMeta(song) {
+      const details = [song.artist, song.album].filter(Boolean);
+      nowMeta.textContent = details.length
+        ? details.join('  •  ')
+        : `${song.year || '2026'}  •  MP3`;
+    }
+
+    function loadTagReader() {
+      if (window.jsmediatags) return Promise.resolve(window.jsmediatags);
+      if (tagsLoader) return tagsLoader;
+      tagsLoader = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/jsmediatags@3.9.5/dist/jsmediatags.min.js';
+        script.onload = () => window.jsmediatags ? resolve(window.jsmediatags) : reject(new Error('Tag reader unavailable'));
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+      return tagsLoader;
+    }
+
+    function loadSongMetadata(song) {
+      if (song.metadataLoaded || song.metadataLoading) return;
+      song.metadataLoading = true;
+      loadTagReader().then(reader => new Promise((resolve, reject) => {
+        reader.read(song.url, {
+          onSuccess: resolve,
+          onError: reject
+        });
+      })).then(({ tags }) => {
+        song.metadataLoading = false;
+        song.metadataLoaded = true;
+        song.artist = tags.artist || '';
+        song.album = tags.album || '';
+        song.year = tags.year || song.year;
+
+        const picture = tags.picture;
+        if (picture && picture.data && picture.data.length) {
+          let binary = '';
+          for (let index = 0; index < picture.data.length; index += 0x8000) {
+            binary += String.fromCharCode(...picture.data.slice(index, index + 0x8000));
+          }
+          song.artwork = `data:${picture.format || 'image/jpeg'};base64,${btoa(binary)}`;
+        }
+
+        if (currentSong && currentSong.id === song.id) {
+          updateNowMeta(song);
+          setArtwork(song);
+        }
+      }).catch(() => {
+        song.metadataLoading = false;
+        song.metadataLoaded = true;
+        if (currentSong && currentSong.id === song.id) updateNowMeta(song);
+      });
     }
 
     function showNowPlaying(song) {
       nowTitle.textContent = song.title;
-      nowMeta.textContent = `${song.year || '2026'}  •  MP3`;
+      updateNowMeta(song);
+      setArtwork(song);
+      nowDownload.href = song.url;
+      nowDownload.download = `${song.title}.mp3`;
       nowPlaying.classList.add('visible');
+      nowCurrent.textContent = '0:00';
+      nowProgressFill.style.width = '0%';
       nowTotal.textContent = song.duration ? formatTime(song.duration) : '—:—';
+      loadSongMetadata(song);
     }
 
     function playSong(song) {
@@ -786,6 +1022,11 @@
     audio.addEventListener('error', () => setStatus('could not play this file', 'error'));
     audio.addEventListener('ended', () => {
       if (!currentSong) return;
+      if (loopEnabled) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+        return;
+      }
       const currentPosition = songs.findIndex(song => song.id === currentSong.id);
       const next = songs[currentPosition + 1];
       if (next) playSong(next);
@@ -796,10 +1037,53 @@
       }
     });
 
+    function playAdjacent(direction) {
+      if (!currentSong) return;
+      if (direction < 0 && audio.currentTime > 3) {
+        audio.currentTime = 0;
+        return;
+      }
+      const currentPosition = songs.findIndex(song => song.id === currentSong.id);
+      const adjacent = songs[currentPosition + direction];
+      if (adjacent) playSong(adjacent);
+    }
+
     nowPlay.addEventListener('click', () => {
       if (!currentSong) return;
       if (audio.paused) audio.play().catch(() => {});
       else audio.pause();
+    });
+
+    previousButton.addEventListener('click', () => playAdjacent(-1));
+    nextButton.addEventListener('click', () => playAdjacent(1));
+
+    loopButton.addEventListener('click', () => {
+      loopEnabled = !loopEnabled;
+      loopButton.classList.toggle('is-active', loopEnabled);
+      loopButton.setAttribute('aria-pressed', String(loopEnabled));
+      loopButton.setAttribute('aria-label', loopEnabled ? 'Loop on' : 'Loop off');
+    });
+
+    volumeSlider.addEventListener('input', () => {
+      const value = Number(volumeSlider.value);
+      audio.muted = value === 0;
+      audio.volume = value;
+      if (value > 0) lastVolume = value;
+      volumeButton.setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute');
+    });
+
+    volumeButton.addEventListener('click', () => {
+      if (audio.muted || audio.volume === 0) {
+        audio.muted = false;
+        audio.volume = lastVolume || 0.85;
+        volumeSlider.value = String(audio.volume);
+        volumeButton.setAttribute('aria-label', 'Mute');
+      } else {
+        lastVolume = audio.volume;
+        audio.muted = true;
+        volumeSlider.value = '0';
+        volumeButton.setAttribute('aria-label', 'Unmute');
+      }
     });
 
     let isSeeking = false;
