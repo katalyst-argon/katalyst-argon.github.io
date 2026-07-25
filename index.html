@@ -35,8 +35,74 @@
       min-height: 100vh;
       margin: 0;
       color: var(--text);
-      background: var(--bg);
+      position: relative;
+      overflow-x: hidden;
+      background: #050507;
       font-family: 'Manrope', system-ui, sans-serif;
+    }
+
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: 0;
+      inset: -18%;
+      pointer-events: none;
+      content: '';
+    }
+
+    body::before {
+      background:
+        radial-gradient(ellipse at 8% 10%, rgba(255, 74, 159, 0.72), transparent 30%),
+        radial-gradient(ellipse at 88% 12%, rgba(149, 96, 255, 0.68), transparent 32%),
+        radial-gradient(ellipse at 79% 80%, rgba(56, 211, 166, 0.3), transparent 25%),
+        radial-gradient(ellipse at 42% 48%, rgba(255, 255, 255, 0.18), transparent 23%),
+        linear-gradient(135deg, #050507 8%, #170b1d 35%, #070910 67%, #111019 100%);
+      background-size: 145% 145%;
+      filter: blur(18px);
+      opacity: 0.9;
+      animation: gradient-drift 22s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      background:
+        radial-gradient(ellipse at 15% 72%, rgba(255, 125, 195, 0.28), transparent 22%),
+        radial-gradient(ellipse at 70% 25%, rgba(184, 128, 255, 0.25), transparent 24%),
+        radial-gradient(ellipse at 55% 92%, rgba(101, 232, 187, 0.16), transparent 20%);
+      background-size: 170% 170%;
+      filter: blur(70px);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+      animation: color-clouds 28s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradient-drift {
+      0% {
+        background-position: 0% 20%;
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        background-position: 100% 75%;
+        transform: scale(1.08) rotate(2deg);
+      }
+      100% {
+        background-position: 20% 100%;
+        transform: scale(1.03) rotate(-2deg);
+      }
+    }
+
+    @keyframes color-clouds {
+      0% {
+        background-position: 100% 0%;
+        transform: translate3d(-4%, 2%, 0) scale(1);
+      }
+      50% {
+        background-position: 0% 100%;
+        transform: translate3d(5%, -3%, 0) scale(1.12);
+      }
+      100% {
+        background-position: 70% 20%;
+        transform: translate3d(-2%, 5%, 0) scale(1.06);
+      }
     }
 
     button, input { font: inherit; }
@@ -44,11 +110,7 @@
     button { color: inherit; }
 
     .stars {
-      position: fixed;
-      z-index: 0;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
+      display: none;
     }
 
     .stars::before {
