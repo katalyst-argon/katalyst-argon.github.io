@@ -838,12 +838,11 @@
     /* ------------------------------------------------------------------
        view counter
     ------------------------------------------------------------------ */
-    // Change this to match your repo for the view counter to work properly
-    const VIEW_NAMESPACE = 'YOUR_USERNAME/YOUR_REPO_NAME';
+    const VIEW_NAMESPACE = 'katalyst-argon/katalyst-argon.github.io';
     const VIEW_KEY = 'exo-songs-views';
     const VIEW_SESSION_KEY = 'exo-view-counted';
     const VIEW_CACHE_KEY = 'exo-view-last';
-    const viewsBox = document.createElement('div'); // hidden placeholder to keep JS working
+    const viewsBox = document.createElement('div');
     const viewsDigits = document.getElementById('viewsDigits') || document.createElement('div');
 
     const VIEW_ENDPOINTS = [
@@ -919,12 +918,12 @@
     /* ------------------------------------------------------------------
        library + player
     ------------------------------------------------------------------ */
-    // ⚠️ IMPORTANT: Change this to YOUR GitHub username and repo name
-    // Example: if your repo is https://github.com/exo/exo-songs
-    // then use: const REPO = 'exo/exo-songs';
-    const REPO = 'YOUR_USERNAME/YOUR_REPO_NAME';
+    // === REPO CONFIG ===
+    // Hardcoded for this repo: katalyst-argon/katalyst-argon.github.io
+    const REPO = 'katalyst-argon/katalyst-argon.github.io';
     const BRANCH = 'main';
     const SONGS_PATH = 'Songs';
+
     const API_URL = `https://api.github.com/repos/${REPO}/contents/${SONGS_PATH}?ref=${BRANCH}`;
     const CACHE_KEY = `exo-song-list:${REPO}:${SONGS_PATH}`;
     const audio = document.getElementById('audio');
@@ -1344,7 +1343,15 @@
         if (songs.length) {
           if (footerText) footerText.textContent = `${songs.length} cached track${songs.length === 1 ? '' : 's'} · GitHub is unavailable`;
         } else {
-          if (list) list.innerHTML = `<div class="empty"><strong>Could not load the library</strong>Check your connection and refresh the page.</div>`;
+          const msg = `
+            <div class="empty">
+              <strong>Could not load the library</strong><br>
+              Make sure:
+              <br>• You have a <strong>Songs</strong> folder in your repo with .mp3 files<br>
+              • The REPO is set correctly at the top of this file<br>
+              • You're viewing the published GitHub Pages site (not a local file)
+            </div>`;
+          if (list) list.innerHTML = msg;
         }
       }
     }
