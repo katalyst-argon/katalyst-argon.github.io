@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080a12" />
+  <meta name="description" content="Contact exo — inquiries, links &amp; ways to reach me." />
+  <title>exo — contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080a12;
+      --panel: rgba(17, 21, 36, 0.82);
+      --panel-solid: #111524;
+      --panel-hover: #171d31;
+      --line: rgba(137, 157, 214, 0.16);
+      --line-strong: rgba(137, 157, 214, 0.28);
+      --text: #edf1ff;
+      --muted: #8994b3;
+      --faint: #5f6b8c;
+      --accent: #8b7cff;
+      --accent-2: #4dd6c0;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { min-height: 100%; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      position: relative;
+      overflow-x: hidden;
+      background: #050507;
+      font-family: 'Manrope', system-ui, sans-serif;
+    }
+    body::before,
+    body::after {
+      position: fixed;
+      z-index: 0;
+      inset: -18%;
+      pointer-events: none;
+      content: '';
+    }
+    body::before {
+      background:
+        radial-gradient(ellipse at 8% 10%, rgba(255, 74, 159, 0.72), transparent 30%),
+        radial-gradient(ellipse at 88% 12%, rgba(149, 96, 255, 0.68), transparent 32%),
+        radial-gradient(ellipse at 79% 80%, rgba(56, 211, 166, 0.3), transparent 25%),
+        radial-gradient(ellipse at 42% 48%, rgba(255, 255, 255, 0.18), transparent 23%),
+        linear-gradient(135deg, #050507 8%, #170b1d 35%, #070910 67%, #111019 100%);
+      background-size: 145% 145%;
+      filter: blur(18px);
+      opacity: 0.9;
+      animation: gradient-drift 22s ease-in-out infinite alternate;
+    }
+    body::after {
+      background:
+        radial-gradient(ellipse at 15% 72%, rgba(255, 125, 195, 0.28), transparent 22%),
+        radial-gradient(ellipse at 70% 25%, rgba(184, 128, 255, 0.25), transparent 24%),
+        radial-gradient(ellipse at 55% 92%, rgba(101, 232, 187, 0.16), transparent 20%);
+      background-size: 170% 170%;
+      filter: blur(70px);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+      animation: color-clouds 28s ease-in-out infinite alternate;
+    }
+    @keyframes gradient-drift {
+      0% { background-position: 0% 20%; transform: scale(1) rotate(0deg); }
+      50% { background-position: 100% 75%; transform: scale(1.08) rotate(2deg); }
+      100% { background-position: 20% 100%; transform: scale(1.03) rotate(-2deg); }
+    }
+    @keyframes color-clouds {
+      0% { background-position: 100% 0%; transform: translate3d(-4%, 2%, 0) scale(1); }
+      50% { background-position: 0% 100%; transform: translate3d(5%, -3%, 0) scale(1.12); }
+      100% { background-position: 70% 20%; transform: translate3d(-2%, 5%, 0) scale(1.06); }
+    }
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 40px, 960px);
+      margin: 0 auto;
+      padding: 30px 0 80px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0 28px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: var(--accent);
+      box-shadow: none;
+    }
+    .brand-mark svg { width: 18px; height: 18px; fill: #080a12; }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 17px;
+      border-radius: 999px;
+      transition: all 160ms ease;
+    }
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+    }
+    .nav-link.active {
+      color: var(--text);
+      background: rgba(139, 124, 255, 0.14);
+    }
+    .hero {
+      padding: 50px 0 40px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(3rem, 9vw, 5.2rem);
+      font-weight: 600;
+      letter-spacing: -0.085em;
+      line-height: 0.92;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 160ms ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .contact-card:hover {
+      background: var(--panel-hover);
+      border-color: rgba(139, 124, 255, 0.4);
+      transform: translateY(-2px);
+    }
+    .contact-card.is-email:hover {
+      border-color: rgba(77, 214, 192, 0.45);
+    }
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      flex: none;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+    }
+    .contact-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-2);
+    }
+    .contact-info {
+      min-width: 0;
+      flex: 1;
+    }
+    .contact-label {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .contact-handle {
+      font-size: 13px;
+      color: var(--muted);
+      font-family: 'Space Grotesk', sans-serif;
+      margin-top: 2px;
+    }
+    .contact-action {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .section {
+      margin-top: 40px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--faint);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .note {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+    .footer {
+      margin-top: 70px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .toast {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      z-index: 30;
+      padding: 9px 16px;
+      border: 1px solid rgba(77, 214, 192, 0.4);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(17, 21, 36, 0.92);
+      backdrop-filter: blur(10px);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -12px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+    .toast.visible { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-width: 640px) {
+      .page { padding: 20px 0 60px; }
+      .nav { flex-direction: column; gap: 14px; align-items: flex-start; }
+      .nav-links { width: 100%; justify-content: flex-start; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- Navigation -->
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8.5 5.4v10.2a3.2 3.2 0 1 1-1.5-2.7V7.1l10-2.5v9.9a3.2 3.2 0 1 1-1.5-2.7V2.7L8.5 5.4Z"/></svg>
+        </span>
+        <span>exo</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">who i am</a>
+        <a href="songs.html" class="nav-link">songs</a>
+        <a href="contact.html" class="nav-link active">contact</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <h1>contact.</h1>
+      <p class="subtitle">Reach out for music, collaborations, or just to say hi.</p>
+    </header>
+
+    <div class="section">
+      <div class="section-title">Main links</div>
+      <div class="contact-grid" id="contactGrid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Direct email</div>
+      <a href="mailto:baited3@proton.me" class="contact-card is-email" style="max-width: 420px;">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-label">baited3@proton.me</div>
+          <div class="contact-handle">Primary contact</div>
+        </div>
+        <div class="contact-action">email</div>
+      </a>
+    </div>
+
+    <div class="section">
+      <div class="section-title">a quick note</div>
+      <div class="note">
+        I reply to most messages within a few days. If you're reaching out about music collabs, sample packs, or archive contributions, feel free to include a link or example.
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>exo / 2026</span>
+      <a href="index.html" style="color: var(--faint); text-decoration: none;">← back home</a>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const CONTACTS = [
+      { label: 'preference',     url: 'https://guns.lol/preference', handle: 'guns.lol/preference' },
+      { label: 'portforward',    url: 'https://guns.lol/portforward', handle: 'guns.lol/portforward' },
+      { label: 'elijah8walker',  url: 'https://guns.lol/elijah8walker', handle: 'guns.lol/elijah8walker' },
+      { label: '1runnersclub',   url: 'https://guns.lol/1runnersclub', handle: 'guns.lol/1runnersclub' },
+      { label: '3jk',            url: 'https://guns.lol/3jk', handle: 'guns.lol/3jk' },
+      { label: 'ospec',          url: 'https://guns.lol/ospec', handle: 'guns.lol/ospec' },
+    ];
+
+    const container = document.getElementById('contactGrid');
+    const toast = document.getElementById('toast');
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('visible');
+      setTimeout(() => toast.classList.remove('visible'), 1700);
+    }
+
+    function createContactCard(entry) {
+      const card = document.createElement('a');
+      card.className = 'contact-card';
+      card.href = entry.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+
+      card.innerHTML = `
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-label">${entry.label}</div>
+          <div class="contact-handle">${entry.handle}</div>
+        </div>
+        <div class="contact-action">open</div>
+      `;
+
+      // Copy on long press or shift-click
+      card.addEventListener('click', (e) => {
+        if (e.shiftKey) {
+          e.preventDefault();
+          copyLink(entry);
+        }
+      });
+
+      // Add copy button on hover
+      const copyBtn = document.createElement('div');
+      copyBtn.style.cssText = 'position:absolute; top:13px; right:13px; font-size:10px; background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:6px; opacity:0; transition:opacity .15s; pointer-events:none;';
+      copyBtn.textContent = 'copy';
+      card.style.position = 'relative';
+      card.appendChild(copyBtn);
+
+      card.addEventListener('mouseenter', () => {
+        copyBtn.style.opacity = '1';
+        copyBtn.style.pointerEvents = 'all';
+      });
+      card.addEventListener('mouseleave', () => {
+        copyBtn.style.opacity = '0';
+        copyBtn.style.pointerEvents = 'none';
+      });
+
+      copyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        copyLink(entry);
+      });
+
+      return card;
+    }
+
+    function copyLink(entry) {
+      const value = entry.url;
+      navigator.clipboard.writeText(value).then(() => {
+        showToast('Copied link to clipboard');
+      }).catch(() => {
+        // fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = value;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast('Copied link to clipboard');
+      });
+    }
+
+    function renderContacts() {
+      container.innerHTML = '';
+      CONTACTS.forEach(entry => {
+        const card = createContactCard(entry);
+        container.appendChild(card);
+      });
+    }
+
+    renderContacts();
+  </script>
+</body>
+</html>
