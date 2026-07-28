@@ -1,15 +1,14 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#080a12" />
-  <meta name="description" content="exo's songs — a personal music archive." />
-  <title>exo's songs</title>
+  <meta name="description" content="exo — personal archive &amp; creative space." />
+  <title>exo — who i am</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #080a12;
@@ -25,10 +24,8 @@
       --accent-2: #4dd6c0;
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
     }
-
     *, *::before, *::after { box-sizing: border-box; }
     html { min-height: 100%; }
-
     body {
       min-height: 100vh;
       margin: 0;
@@ -38,7 +35,6 @@
       background: #050507;
       font-family: 'Manrope', system-ui, sans-serif;
     }
-
     body::before,
     body::after {
       position: fixed;
@@ -47,7 +43,6 @@
       pointer-events: none;
       content: '';
     }
-
     body::before {
       background:
         radial-gradient(ellipse at 8% 10%, rgba(255, 74, 159, 0.72), transparent 30%),
@@ -60,7 +55,6 @@
       opacity: 0.9;
       animation: gradient-drift 22s ease-in-out infinite alternate;
     }
-
     body::after {
       background:
         radial-gradient(ellipse at 15% 72%, rgba(255, 125, 195, 0.28), transparent 22%),
@@ -72,1488 +66,343 @@
       opacity: 0.7;
       animation: color-clouds 28s ease-in-out infinite alternate;
     }
-
     @keyframes gradient-drift {
       0% { background-position: 0% 20%; transform: scale(1) rotate(0deg); }
       50% { background-position: 100% 75%; transform: scale(1.08) rotate(2deg); }
       100% { background-position: 20% 100%; transform: scale(1.03) rotate(-2deg); }
     }
-
     @keyframes color-clouds {
       0% { background-position: 100% 0%; transform: translate3d(-4%, 2%, 0) scale(1); }
       50% { background-position: 0% 100%; transform: translate3d(5%, -3%, 0) scale(1.12); }
       100% { background-position: 70% 20%; transform: translate3d(-2%, 5%, 0) scale(1.06); }
     }
-
-    button, input { font: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
-    button { color: inherit; }
-
-    .stars { display: none; }
-
     .page {
       position: relative;
       z-index: 1;
       width: min(100% - 40px, 960px);
       margin: 0 auto;
-      padding: 30px 0 150px;
+      padding: 30px 0 80px;
     }
-
-    .topbar {
+    .nav {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      padding: 16px 0 28px;
     }
-
-    .topbar-left {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      min-width: 0;
-    }
-
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 11px;
+      gap: 12px;
       color: var(--text);
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
       letter-spacing: -0.02em;
       text-decoration: none;
     }
-
     .brand-mark {
       display: grid;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       place-items: center;
       border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 7px;
+      border-radius: 8px;
       background: var(--accent);
       box-shadow: none;
     }
-
-    .brand-mark svg { width: 17px; height: 17px; fill: #080a12; }
-
-    /* ---------- contact / inquiries panel ---------- */
-    .contact {
-      width: min(100%, 340px);
-      padding: 13px 14px 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(17, 21, 36, 0.72);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.32);
-    }
-
-    .contact-head {
+    .brand-mark svg { width: 18px; height: 18px; fill: #080a12; }
+    .nav-links {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .contact-label {
-      color: var(--accent-2);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .contact-toggle {
-      display: grid;
-      width: 22px;
-      height: 22px;
-      padding: 0;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      color: var(--muted);
-      background: transparent;
-      cursor: pointer;
-      transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-
-    .contact-toggle:hover { color: var(--text); border-color: var(--line-strong); background: rgba(255, 255, 255, 0.06); }
-    .contact-toggle svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 200ms ease; }
-    .contact.collapsed .contact-toggle svg { transform: rotate(-90deg); }
-    .contact.collapsed .contact-body { display: none; }
-
-    .contact-links {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
       gap: 8px;
-      min-width: 0;
-      padding: 7px 9px;
-      border: 1px solid transparent;
-      border-radius: 8px;
+      align-items: center;
+    }
+    .nav-link {
       color: var(--muted);
-      background: rgba(255, 255, 255, 0.022);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11.5px;
-      font-weight: 500;
-      letter-spacing: -0.01em;
       text-decoration: none;
-      transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 160ms ease;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 17px;
+      border-radius: 999px;
+      transition: all 160ms ease;
     }
-
-    .contact-link:hover {
+    .nav-link:hover {
       color: var(--text);
-      border-color: rgba(139, 124, 255, 0.55);
-      background: var(--panel-hover);
-      transform: translateY(-1px);
+      background: rgba(255,255,255,0.06);
     }
-
-    .contact-link.is-mail { grid-column: 1 / -1; }
-    .contact-link.is-mail:hover { border-color: rgba(77, 214, 192, 0.55); }
-
-    .contact-favicon {
-      flex: none;
-      display: grid;
-      width: 18px;
-      height: 18px;
-      place-items: center;
-      overflow: hidden;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.07);
-    }
-
-    .contact-favicon img { display: block; width: 14px; height: 14px; object-fit: contain; }
-    .contact-favicon svg { width: 12px; height: 12px; fill: none; stroke: var(--accent-2); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-
-    .contact-name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .contact-copy {
-      flex: none;
-      margin-left: auto;
-      color: var(--faint);
-      font-size: 9px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      opacity: 0;
-      transition: opacity 160ms ease;
-    }
-
-    .contact-link:hover .contact-copy { opacity: 1; }
-
-    /* ---------- view counter ---------- */
-    .topbar-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 12px;
-      flex: none;
-    }
-
-    .views {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border: 1px solid var(--line);
-      border-radius: 11px;
-      background: rgba(17, 21, 36, 0.72);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
-    }
-
-    .views-eye {
-      flex: none;
-      width: 15px;
-      height: 15px;
-      fill: none;
-      stroke: var(--accent-2);
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .views-copy { display: flex; flex-direction: column; gap: 3px; line-height: 1; }
-
-    .views-label {
-      color: var(--faint);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 8.5px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .views-digits { display: flex; align-items: center; gap: 2px; }
-
-    .views-digit {
-      display: grid;
-      min-width: 15px;
-      height: 21px;
-      padding: 0 2px;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 4px;
+    .nav-link.active {
       color: var(--text);
-      background: rgba(5, 7, 13, 0.55);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
+      background: rgba(139, 124, 255, 0.14);
     }
-
-    .views-digit.is-sep {
-      min-width: 0;
-      border-color: transparent;
-      color: var(--faint);
-      background: transparent;
+    .hero {
+      padding: 60px 0 50px;
+      text-align: left;
     }
-
-    .views.is-loading .views-digit { color: var(--faint); animation: views-pulse 1.1s ease-in-out infinite; }
-    .views.is-error .views-eye { stroke: #ff7d9d; }
-
-    @keyframes views-pulse { 50% { opacity: 0.4; } }
-
-    .views.bumped .views-digit { animation: views-bump 420ms ease; }
-
-    @keyframes views-bump {
-      40% { border-color: rgba(77, 214, 192, 0.7); transform: translateY(-2px); }
-      100% { transform: translateY(0); }
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent-2);
-      box-shadow: 0 0 0 4px rgba(77, 214, 192, 0.1);
-    }
-
-    .status.is-loading .status-dot {
-      background: var(--accent);
-      animation: pulse 1.2s ease-in-out infinite;
-    }
-
-    .status.is-error .status-dot { background: #ff7d9d; }
-
-    @keyframes pulse { 50% { opacity: 0.35; transform: scale(0.75); } }
-
-    .hero { padding: 60px 0 42px; }
-
     h1 {
-      max-width: 700px;
-      margin: 0;
+      max-width: 720px;
+      margin: 0 0 16px;
       color: var(--text);
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(3.3rem, 10vw, 6.2rem);
+      font-size: clamp(3.1rem, 9vw, 5.8rem);
       font-weight: 600;
       letter-spacing: -0.085em;
       line-height: 0.92;
     }
-
-    h1 span { color: var(--accent-2); }
-
-    .library {
-      overflow: hidden;
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--accent-2);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 30px;
+    }
+    .section {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 44px rgba(0, 0, 0, 0.32);
+    }
+    .section h2 {
+      margin: 0 0 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+    .bio {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: var(--text);
+      max-width: 44ch;
+    }
+    .bio p {
+      margin: 0 0 18px;
+    }
+    .bio p:last-child {
+      margin-bottom: 0;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .stat {
+      padding: 14px 16px;
       border: 1px solid var(--line);
       border-radius: 12px;
-      background: var(--panel-solid);
-      box-shadow: var(--shadow);
-    }
-
-    .library-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-      padding: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .library-title {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      min-width: max-content;
-    }
-
-    .library-title h2 {
-      margin: 0;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.035em;
-    }
-
-    .count {
-      color: var(--faint);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-    }
-
-    .search { position: relative; width: min(100%, 310px); }
-
-    .search-icon {
-      position: absolute;
-      top: 50%;
-      left: 14px;
-      width: 16px;
-      height: 16px;
-      color: var(--faint);
-      pointer-events: none;
-      transform: translateY(-50%);
-    }
-
-    .search input {
-      width: 100%;
-      height: 42px;
-      padding: 0 38px 0 42px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      outline: none;
-      color: var(--text);
-      background: rgba(5, 7, 13, 0.34);
-      font-size: 13px;
-      transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
-    }
-
-    .search input::placeholder { color: var(--faint); }
-
-    .search input:focus {
-      border-color: rgba(139, 124, 255, 0.8);
-      background: rgba(5, 7, 13, 0.56);
-      box-shadow: 0 0 0 4px rgba(139, 124, 255, 0.11);
-    }
-
-    .clear-search {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      display: grid;
-      width: 25px;
-      height: 25px;
-      padding: 0;
-      border: 0;
-      border-radius: 7px;
-      place-items: center;
-      color: var(--muted);
-      background: transparent;
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-50%);
-      transition: opacity 160ms ease, background 160ms ease, color 160ms ease;
-    }
-
-    .clear-search.visible { opacity: 1; pointer-events: auto; }
-    .clear-search:hover { color: var(--text); background: rgba(255, 255, 255, 0.08); }
-
-    .track-list { display: grid; gap: 9px; padding: 12px; }
-
-    .track {
-      position: relative;
-      display: grid;
-      grid-template-columns: 42px minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 14px;
-      min-height: 80px;
-      padding: 13px 16px 15px;
-      overflow: hidden;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.018);
-      cursor: pointer;
-      transition: background 160ms ease, border-color 160ms ease;
-    }
-
-    .track:hover { border-color: var(--line); background: var(--panel-hover); }
-    .track.active { border-color: rgba(139, 124, 255, 0.62); background: #181c2b; }
-
-    .track-number {
-      align-self: center;
-      color: var(--faint);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      background: rgba(5, 7, 13, 0.4);
       text-align: center;
     }
-
-    .track.active .track-number { color: var(--accent-2); }
-
-    .play-button, .now-play {
-      display: grid;
-      place-items: center;
-      padding: 0;
-      border: 1px solid var(--line-strong);
-      border-radius: 50%;
-      color: var(--text);
-      background: transparent;
-      cursor: pointer;
-      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
-    }
-
-    .play-button { width: 38px; height: 38px; }
-    .track:hover .play-button { border-color: rgba(139, 124, 255, 0.7); }
-
-    .track.active .play-button, .play-button:hover {
-      border-color: transparent;
-      background: var(--accent);
-      box-shadow: none;
-    }
-
-    .play-button svg { width: 15px; height: 15px; fill: currentColor; }
-    .play-button .pause-svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
-
-    .track-main { display: flex; align-items: center; min-width: 0; gap: 14px; }
-    .track-info { min-width: 0; }
-
-    .track-title {
-      overflow: hidden;
-      color: var(--text);
-      font-size: 14px;
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
       font-weight: 700;
-      letter-spacing: -0.02em;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .track-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 5px;
-      color: var(--muted);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-    }
-
-    .meta-dot { color: var(--faint); }
-    .track-end { display: flex; align-items: center; gap: 15px; }
-
-    .duration {
-      min-width: 38px;
-      color: var(--muted);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      text-align: right;
-    }
-
-    .download {
-      display: grid;
-      width: 32px;
-      height: 32px;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
-    }
-
-    .download:hover {
-      border-color: rgba(77, 214, 192, 0.55);
+      line-height: 1;
       color: var(--accent-2);
-      background: rgba(77, 214, 192, 0.08);
     }
-
-    .download svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
-
-    .track-progress {
-      position: absolute;
-      right: 16px;
-      bottom: 7px;
-      left: 16px;
-      height: 2px;
-      overflow: hidden;
-      border-radius: 2px;
-      background: rgba(137, 157, 214, 0.12);
-      opacity: 0;
-      transition: opacity 180ms ease;
-    }
-
-    .track.active .track-progress { opacity: 1; }
-    .track-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
-
-    .empty {
-      padding: 72px 20px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-      text-align: center;
-    }
-
-    .empty strong { display: block; margin-bottom: 5px; color: var(--text); font-size: 15px; }
-
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 18px 20px 20px;
-      border-top: 1px solid var(--line);
-      color: var(--faint);
-      font-family: 'Space Grotesk', sans-serif;
+    .stat-label {
       font-size: 11px;
-    }
-
-    .now-playing {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      left: 20px;
-      z-index: 10;
-      display: none;
-      width: min(920px, calc(100% - 40px));
-      margin: 0 auto;
-      border: 1px solid #30395d;
-      border-radius: 10px;
-      background: var(--panel-solid);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
-    }
-
-    .now-playing.visible { display: block; animation: slide-up 220ms ease both; }
-
-    @keyframes slide-up {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .now-inner {
-      display: grid;
-      grid-template-columns: 72px minmax(0, 1fr);
-      align-items: center;
-      gap: 16px;
-      padding: 12px 16px;
-    }
-
-    .now-artwork {
-      display: grid;
-      width: 72px;
-      height: 72px;
-      overflow: hidden;
-      place-items: center;
-      border: 1px solid var(--line-strong);
-      border-radius: 7px;
       color: var(--faint);
-      background: #0b0e18;
-    }
-
-    .now-artwork svg { width: 25px; height: 25px; fill: currentColor; }
-    .now-artwork img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .now-content { min-width: 0; }
-    .now-copy { min-width: 0; }
-
-    .now-label {
-      margin-bottom: 4px;
-      color: var(--accent-2);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
+      margin-top: 4px;
     }
-
-    .now-title {
-      overflow: hidden;
-      color: var(--text);
+    .interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
       font-size: 13px;
-      font-weight: 700;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(139, 124, 255, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(139, 124, 255, 0.2);
+      font-weight: 600;
+      letter-spacing: -.01em;
     }
-
-    .now-meta { margin-top: 3px; color: var(--muted); font-size: 10px; }
-    .now-progress-wrap { margin-top: 10px; cursor: pointer; user-select: none; }
-
-    .now-progress {
-      position: relative;
-      height: 4px;
-      border-radius: 4px;
-      background: rgba(137, 157, 214, 0.18);
-      cursor: grab;
-      touch-action: none;
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
     }
-
-    .now-progress:active { cursor: grabbing; }
-
-    .now-progress-fill {
-      position: relative;
-      width: 0;
-      height: 100%;
-      border-radius: 4px;
-      background: var(--accent-2);
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(17, 21, 36, 0.6);
+      transition: all 160ms ease;
     }
-
-    .now-progress-fill::after {
-      position: absolute;
-      top: 50%;
-      right: -6px;
-      width: 12px;
-      height: 12px;
-      border: 2px solid var(--panel-solid);
-      border-radius: 50%;
-      background: var(--accent-2);
-      content: '';
-      transform: translateY(-50%);
+    .link-card:hover {
+      background: var(--panel-hover);
+      border-color: rgba(139, 124, 255, 0.4);
+      transform: translateY(-1px);
     }
-
-    .now-times {
+    .link-card .icon {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      color: var(--accent-2);
+    }
+    .link-card .icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    .link-card .label {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .footer {
+      margin-top: 70px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--faint);
       display: flex;
       justify-content: space-between;
-      margin-top: 5px;
-      color: var(--faint);
+      align-items: center;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 10px;
     }
-
-    .now-controls { display: flex; align-items: center; gap: 9px; margin-top: 9px; }
-
-    .player-control, .now-play {
-      display: grid;
-      width: 27px;
-      height: 27px;
-      padding: 0;
-      place-items: center;
-      border: 0;
-      border-radius: 50%;
-      color: var(--muted);
-      background: transparent;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color 160ms ease, background 160ms ease;
-    }
-
-    .player-control:hover, .player-control.is-active { color: var(--text); background: rgba(139, 124, 255, 0.14); }
-    .player-control svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
-
-    .now-play { width: 34px; height: 34px; color: #fff; background: var(--accent); }
-    .now-play:hover { color: #fff; background: #9b8eff; }
-    .now-play svg { width: 15px; height: 15px; fill: currentColor; }
-    .now-play .pause-svg { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; }
-
-    .volume-control { display: flex; align-items: center; gap: 5px; margin-left: 6px; }
-    .volume-control input[type="range"] { width: 82px; height: 4px; accent-color: var(--accent-2); cursor: pointer; }
-    .download-control { margin-left: auto; }
-
-    .toast {
-      position: fixed;
-      top: 18px;
-      left: 50%;
-      z-index: 30;
-      padding: 9px 16px;
-      border: 1px solid rgba(77, 214, 192, 0.4);
-      border-radius: 999px;
-      color: var(--text);
-      background: rgba(17, 21, 36, 0.92);
-      backdrop-filter: blur(10px);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translate(-50%, -12px);
-      transition: opacity 180ms ease, transform 180ms ease;
-    }
-
-    .toast.visible { opacity: 1; transform: translate(-50%, 0); }
-
-    @media (max-width: 650px) {
-      .page { width: min(100% - 28px, 960px); padding-top: 20px; }
-      .topbar { align-items: flex-start; flex-direction: column; gap: 14px; }
-      .topbar-left { width: 100%; }
-      .contact { width: 100%; }
-      .hero { padding: 44px 0 30px; }
-      .library-toolbar { align-items: stretch; flex-direction: column; gap: 16px; }
-      .search { width: 100%; }
-      .track { grid-template-columns: 28px minmax(0, 1fr) auto; gap: 10px; padding: 12px 11px 14px; }
-      .track-main { gap: 10px; }
-      .track-end { gap: 8px; }
-      .duration { display: none; }
-      .download { width: 30px; height: 30px; }
-      .track-progress { right: 11px; left: 11px; }
-      .now-playing { right: 14px; bottom: 14px; left: 14px; width: calc(100% - 28px); }
-      .now-inner { grid-template-columns: 58px minmax(0, 1fr); gap: 11px; padding: 10px 11px; }
-      .now-artwork { width: 58px; height: 58px; }
-      .now-progress-wrap { margin-top: 8px; }
-      .now-controls { gap: 5px; margin-top: 7px; }
-      .volume-control { margin-left: 2px; }
-      .volume-control input[type="range"] { width: 58px; }
-      .download-control { margin-left: 0; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    @media (max-width: 780px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .nav {
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
-
 <body>
   <main class="page">
-    <nav class="topbar" aria-label="Site navigation">
-      <div class="topbar-left">
-        <a class="brand" href="./" aria-label="exo's songs home">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M8.5 5.4v10.2a3.2 3.2 0 1 1-1.5-2.7V7.1l10-2.5v9.9a3.2 3.2 0 1 1-1.5-2.7V2.7L8.5 5.4Z"/></svg>
-          </span>
-          <span>exo / audio archive</span>
-        </a>
-
-        <aside class="contact" id="contact" aria-label="Inquiries and contact">
-          <div class="contact-head">
-            <span class="contact-label">Inquiries &amp; contact</span>
-            <button class="contact-toggle" id="contactToggle" type="button" aria-expanded="true" aria-controls="contactBody" aria-label="Collapse contact list">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
-            </button>
-          </div>
-          <div class="contact-body" id="contactBody">
-            <div class="contact-links" id="contactLinks"></div>
-          </div>
-        </aside>
-      </div>
-
-      <div class="topbar-right">
-        <div class="views is-loading" id="views" title="Total page views">
-          <svg class="views-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"></path><circle cx="12" cy="12" r="2.6"></circle></svg>
-          <div class="views-copy">
-            <span class="views-label">Total views</span>
-            <div class="views-digits" id="viewsDigits" aria-live="polite" aria-label="Total page views">
-              <span class="views-digit">-</span><span class="views-digit">-</span><span class="views-digit">-</span>
-            </div>
-          </div>
-        </div>
-        <div class="status is-loading" id="status"><span class="status-dot"></span><span id="statusText">loading library</span></div>
+    <!-- Navigation -->
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8.5 5.4v10.2a3.2 3.2 0 1 1-1.5-2.7V7.1l10-2.5v9.9a3.2 3.2 0 1 1-1.5-2.7V2.7L8.5 5.4Z"/></svg>
+        </span>
+        <span>exo</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link active">who i am</a>
+        <a href="songs.html" class="nav-link">songs</a>
+        <a href="contact.html" class="nav-link">contact</a>
       </div>
     </nav>
 
     <header class="hero">
-      <h1>exo's <span>songs.</span></h1>
+      <h1>who i am.</h1>
+      <p class="subtitle">exo's digital archive &amp; creative space.</p>
     </header>
 
-    <section class="library" aria-label="Song library">
-      <div class="library-toolbar">
-        <div class="library-title">
-          <h2>All tracks</h2>
-          <span class="count" id="count">—</span>
+    <div class="about-grid">
+      <!-- Bio -->
+      <div class="section">
+        <h2>about me</h2>
+        <div class="bio">
+          <p>I'm exo — a music collector, digital archivist, and occasional builder of small beautiful things.</p>
+          <p>I spend most of my time hunting for rare sounds, organizing personal libraries, and building quiet spaces on the internet.</p>
+          <p>This site is my home for the music I love and the things I create.</p>
         </div>
-        <label class="search" for="searchInput">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path></svg>
-          <input id="searchInput" type="search" placeholder="Search songs…" autocomplete="off" spellcheck="false" aria-label="Search songs" />
-          <button class="clear-search" id="clearSearch" type="button" aria-label="Clear search">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>
-          </button>
-        </label>
       </div>
 
-      <div class="track-list" id="trackList" aria-live="polite">
-        <div class="empty"><strong>Loading your library</strong>Fetching the latest track list…</div>
-      </div>
-
-      <footer class="footer">
-        <span id="footerText">Songs are loaded from GitHub.</span>
-        <span>© exo</span>
-      </footer>
-    </section>
-  </main>
-
-  <section class="now-playing" id="nowPlaying" aria-label="Now playing">
-    <div class="now-inner">
-      <div class="now-artwork" id="nowArtwork" aria-label="Album artwork">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.4v10.2a3.2 3.2 0 1 1-1.5-2.7V7.1l10-2.5v9.9a3.2 3.2 0 1 1-1.5-2.7V2.7L8.5 5.4Z"></path></svg>
-      </div>
-      <div class="now-content">
-        <div class="now-copy">
-          <div class="now-label">Now playing</div>
-          <div class="now-title" id="nowTitle">—</div>
-          <div class="now-meta" id="nowMeta">—</div>
-        </div>
-        <div class="now-progress-wrap" id="nowProgressWrap" role="slider" aria-label="Song progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-          <div class="now-progress"><div class="now-progress-fill" id="nowProgressFill"></div></div>
-          <div class="now-times"><span id="nowCurrent">0:00</span><span id="nowTotal">—:—</span></div>
-        </div>
-        <div class="now-controls" aria-label="Playback controls">
-          <button class="player-control" id="prevSong" type="button" aria-label="Previous song">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M18 6l-9 6 9 6V6Z"></path></svg>
-          </button>
-          <button class="now-play" id="nowPlay" type="button" aria-label="Play">
-            <svg class="play-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5Z"></path></svg>
-          </button>
-          <button class="player-control" id="nextSong" type="button" aria-label="Next song">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M6 6l9 6-9 6V6Z"></path></svg>
-          </button>
-          <button class="player-control" id="loopSong" type="button" aria-label="Loop off" aria-pressed="false">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5h2a2 2 0 0 1 2 2v3M7 19H5a2 2 0 0 1-2-2v-3M19 5l-3 3M5 19l3-3M7 8h8a4 4 0 0 1 4 4M17 16H9a4 4 0 0 1-4-4"></path></svg>
-          </button>
-          <div class="volume-control">
-            <button class="player-control volume-button" id="volumeButton" type="button" aria-label="Mute">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4Z"></path><path class="volume-wave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"></path></svg>
-            </button>
-            <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.85" aria-label="Volume" />
+      <!-- Quick stats -->
+      <div class="section">
+        <h2>at a glance</h2>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value">300+</div>
+            <div class="stat-label">tracks archived</div>
           </div>
-          <a class="player-control download-control" id="nowDownload" href="#" download aria-label="Download song">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M5 20h14"></path></svg>
-          </a>
+          <div class="stat">
+            <div class="stat-value">42</div>
+            <div class="stat-label">playlists</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">2021</div>
+            <div class="stat-label">started collecting</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 26px;">
+          <div style="font-size:13px; font-weight:600; color:var(--faint); margin-bottom:8px; letter-spacing:0.5px;">CURRENTLY OBSESSED WITH</div>
+          <div class="interests">
+            <span class="tag">ambient</span>
+            <span class="tag">hyperpop</span>
+            <span class="tag">underground rap</span>
+            <span class="tag">breakcore</span>
+            <span class="tag">lo-fi house</span>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <audio id="audio" preload="none"></audio>
-
-  <script>
-    /* ------------------------------------------------------------------
-       contact / inquiries
-    ------------------------------------------------------------------ */
-    const CONTACTS = [
-      { label: 'preference',     url: 'https://guns.lol/preference' },
-      { label: 'portforward',    url: 'https://guns.lol/portforward' },
-      { label: 'elijah8walker',  url: 'https://guns.lol/elijah8walker' },
-      { label: '1runnersclub',   url: 'https://guns.lol/1runnersclub' },
-      { label: '3jk',            url: 'https://guns.lol/3jk' },
-      { label: 'ospec',          url: 'https://guns.lol/ospec' },
-      { label: 'baited3@proton.me', url: 'mailto:baited3@proton.me', mail: true }
-    ];
-
-    const contactPanel = document.getElementById('contact');
-    const contactToggle = document.getElementById('contactToggle');
-    const contactLinks = document.getElementById('contactLinks');
-    const toast = document.getElementById('toast');
-
-    let toastTimer = null;
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add('visible');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('visible'), 1600);
-    }
-
-    const mailIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z"></path><path d="m3.6 7 8.4 6 8.4-6"></path></svg>';
-
-    function faviconFor(url) {
-      const host = new URL(url).hostname;
-      return `https://www.google.com/s2/favicons?domain=${host}&sz=64`;
-    }
-
-    function renderContacts() {
-      contactLinks.innerHTML = '';
-      CONTACTS.forEach(entry => {
-        const link = document.createElement('a');
-        link.className = `contact-link${entry.mail ? ' is-mail' : ''}`;
-        link.href = entry.url;
-        link.title = entry.mail ? `Email ${entry.label}` : entry.url.replace(/^https?:\/\//, '');
-        if (!entry.mail) {
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-        }
-
-        const icon = document.createElement('span');
-        icon.className = 'contact-favicon';
-        if (entry.mail) {
-          icon.innerHTML = mailIcon;
-        } else {
-          const image = new Image();
-          image.alt = '';
-          image.loading = 'lazy';
-          image.src = faviconFor(entry.url);
-          image.onerror = () => { icon.innerHTML = mailIcon; };
-          icon.appendChild(image);
-        }
-
-        const name = document.createElement('span');
-        name.className = 'contact-name';
-        name.textContent = entry.mail ? entry.label : `guns.lol/${entry.label}`;
-
-        const copy = document.createElement('span');
-        copy.className = 'contact-copy';
-        copy.textContent = 'copy';
-        copy.addEventListener('click', event => {
-          event.preventDefault();
-          event.stopPropagation();
-          const value = entry.mail ? entry.label : entry.url;
-          navigator.clipboard?.writeText(value)
-            .then(() => showToast(`copied ${value}`))
-            .catch(() => showToast('could not copy'));
-        });
-
-        link.append(icon, name, copy);
-        contactLinks.appendChild(link);
-      });
-    }
-
-    contactToggle.addEventListener('click', () => {
-      const collapsed = contactPanel.classList.toggle('collapsed');
-      contactToggle.setAttribute('aria-expanded', String(!collapsed));
-      contactToggle.setAttribute('aria-label', collapsed ? 'Expand contact list' : 'Collapse contact list');
-    });
-
-    renderContacts();
-
-    /* ------------------------------------------------------------------
-       view counter
-    ------------------------------------------------------------------ */
-    const VIEW_NAMESPACE = 'katalyst-argon.github.io';
-    const VIEW_KEY = 'exo-songs-views';
-    const VIEW_SESSION_KEY = 'exo-view-counted';
-    const VIEW_CACHE_KEY = 'exo-view-last';
-
-    const viewsBox = document.getElementById('views');
-    const viewsDigits = document.getElementById('viewsDigits');
-
-    // Primary + fallback counter services (both are free, keyless, CORS-enabled).
-    const VIEW_ENDPOINTS = [
-      {
-        hit: `https://abacus.jasoncameron.dev/hit/${VIEW_NAMESPACE}/${VIEW_KEY}`,
-        get: `https://abacus.jasoncameron.dev/get/${VIEW_NAMESPACE}/${VIEW_KEY}`
-      },
-      {
-        hit: `https://countapi.mileshilliard.com/api/v1/hit/${VIEW_NAMESPACE.replace(/\W/g, '_')}_${VIEW_KEY.replace(/\W/g, '_')}`,
-        get: `https://countapi.mileshilliard.com/api/v1/get/${VIEW_NAMESPACE.replace(/\W/g, '_')}_${VIEW_KEY.replace(/\W/g, '_')}`
-      }
-    ];
-
-    function renderViews(total, animate) {
-      const text = Number(total).toLocaleString('en-US');
-      viewsDigits.replaceChildren();
-      [...text].forEach(character => {
-        const cell = document.createElement('span');
-        cell.className = `views-digit${character === ',' ? ' is-sep' : ''}`;
-        cell.textContent = character;
-        viewsDigits.appendChild(cell);
-      });
-      viewsBox.classList.remove('is-loading', 'is-error');
-      if (animate) {
-        viewsBox.classList.remove('bumped');
-        void viewsBox.offsetWidth;
-        viewsBox.classList.add('bumped');
-      }
-    }
-
-    function countUpTo(target) {
-      const start = Number(sessionStorage.getItem(VIEW_CACHE_KEY)) || 0;
-      const from = start && start < target && target - start < 400 ? start : Math.max(0, target - 24);
-      const duration = 700;
-      const began = performance.now();
-
-      function step(now) {
-        const progress = Math.min(1, (now - began) / duration);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        renderViews(Math.round(from + (target - from) * eased), false);
-        if (progress < 1) requestAnimationFrame(step);
-        else renderViews(target, true);
-      }
-      requestAnimationFrame(step);
-    }
-
-    async function readCount(url) {
-      const response = await fetch(url, { cache: 'no-store' });
-      if (!response.ok) throw new Error(`Counter returned ${response.status}`);
-      const data = await response.json();
-      const value = Number(data.value ?? data.count ?? data?.data?.up_count);
-      if (!Number.isFinite(value)) throw new Error('Unexpected counter payload');
-      return value;
-    }
-
-    async function loadViews() {
-      // Only increment once per browser session, so refreshes don't inflate the number.
-      const alreadyCounted = sessionStorage.getItem(VIEW_SESSION_KEY) === '1';
-
-      for (const endpoint of VIEW_ENDPOINTS) {
-        try {
-          const total = await readCount(alreadyCounted ? endpoint.get : endpoint.hit);
-          sessionStorage.setItem(VIEW_SESSION_KEY, '1');
-          countUpTo(total);
-          sessionStorage.setItem(VIEW_CACHE_KEY, String(total));
-          localStorage.setItem(VIEW_CACHE_KEY, String(total));
-          return;
-        } catch (error) {
-          console.warn('View counter endpoint failed:', endpoint.hit, error);
-        }
-      }
-
-      const cached = Number(localStorage.getItem(VIEW_CACHE_KEY));
-      if (Number.isFinite(cached) && cached > 0) {
-        renderViews(cached, false);
-        viewsBox.title = 'Last known view count (counter offline)';
-      } else {
-        viewsDigits.textContent = '—';
-        viewsBox.title = 'View counter unavailable';
-      }
-      viewsBox.classList.remove('is-loading');
-      viewsBox.classList.add('is-error');
-    }
-
-    loadViews();
-
-    /* ------------------------------------------------------------------
-       library + player
-    ------------------------------------------------------------------ */
-    const REPO = 'katalyst-argon/katalyst-argon.github.io';
-    const BRANCH = 'main';
-    const SONGS_PATH = 'Songs';
-    const API_URL = `https://api.github.com/repos/${REPO}/contents/${SONGS_PATH}?ref=${BRANCH}`;
-    const CACHE_KEY = `exo-song-list:${REPO}:${SONGS_PATH}`;
-
-    const audio = document.getElementById('audio');
-    const list = document.getElementById('trackList');
-    const count = document.getElementById('count');
-    const footerText = document.getElementById('footerText');
-    const searchInput = document.getElementById('searchInput');
-    const clearSearch = document.getElementById('clearSearch');
-    const status = document.getElementById('status');
-    const statusText = document.getElementById('statusText');
-    const nowPlaying = document.getElementById('nowPlaying');
-    const nowTitle = document.getElementById('nowTitle');
-    const nowMeta = document.getElementById('nowMeta');
-    const nowPlay = document.getElementById('nowPlay');
-    const nowProgressWrap = document.getElementById('nowProgressWrap');
-    const nowProgress = nowProgressWrap.querySelector('.now-progress');
-    const nowProgressFill = document.getElementById('nowProgressFill');
-    const nowCurrent = document.getElementById('nowCurrent');
-    const nowTotal = document.getElementById('nowTotal');
-    const nowArtwork = document.getElementById('nowArtwork');
-    const nowDownload = document.getElementById('nowDownload');
-    const previousButton = document.getElementById('prevSong');
-    const nextButton = document.getElementById('nextSong');
-    const loopButton = document.getElementById('loopSong');
-    const volumeButton = document.getElementById('volumeButton');
-    const volumeSlider = document.getElementById('volumeSlider');
-
-    let songs = [];
-    let currentSong = null;
-    let searchTerm = '';
-    let loopEnabled = false;
-    let lastVolume = Number(volumeSlider.value) || 0.85;
-    let tagsLoader = null;
-
-    audio.volume = lastVolume;
-
-    function escapeHTML(value) {
-      return String(value).replace(/[&<>'"]/g, char => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-      }[char]));
-    }
-
-    function setStatus(message, state = 'ready') {
-      status.className = `status${state === 'loading' ? ' is-loading' : state === 'error' ? ' is-error' : ''}`;
-      statusText.textContent = message;
-    }
-
-    function formatTime(seconds) {
-      if (!Number.isFinite(seconds)) return '—:—';
-      const minutes = Math.floor(seconds / 60);
-      const remaining = Math.floor(seconds % 60).toString().padStart(2, '0');
-      return `${minutes}:${remaining}`;
-    }
-
-    function playIcon() {
-      return '<svg class="play-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5Z"></path></svg>';
-    }
-
-    function pauseIcon() {
-      return '<svg class="pause-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg>';
-    }
-
-    function setButtonIcon(button, playing) {
-      button.innerHTML = playing ? pauseIcon() : playIcon();
-      button.setAttribute('aria-label', playing ? 'Pause' : 'Play');
-    }
-
-    function cachedSongs() {
-      try {
-        const value = JSON.parse(localStorage.getItem(CACHE_KEY));
-        return Array.isArray(value) ? value : [];
-      } catch (_) {
-        return [];
-      }
-    }
-
-    function saveSongs(value) {
-      try { localStorage.setItem(CACHE_KEY, JSON.stringify(value)); } catch (_) { /* storage is optional */ }
-    }
-
-    function filteredSongs() {
-      const query = searchTerm.trim().toLocaleLowerCase();
-      if (!query) return songs;
-      return songs.filter(song => song.title.toLocaleLowerCase().includes(query));
-    }
-
-    function renderSongs() {
-      const visible = filteredSongs();
-      count.textContent = searchTerm.trim() ? `${visible.length} / ${songs.length}` : `${songs.length}`;
-      clearSearch.classList.toggle('visible', Boolean(searchTerm));
-      list.innerHTML = '';
-
-      if (!visible.length) {
-        list.innerHTML = songs.length
-          ? '<div class="empty"><strong>No matching songs</strong>Try a different search term.</div>'
-          : '<div class="empty"><strong>No songs yet</strong>Add MP3 files to the Songs folder to see them here.</div>';
-        return;
-      }
-
-      visible.forEach((song, index) => {
-        const track = document.createElement('article');
-        track.className = 'track';
-        track.dataset.id = song.id;
-        track.setAttribute('tabindex', '0');
-        track.setAttribute('role', 'button');
-        track.setAttribute('aria-label', `Play ${song.title}`);
-        track.innerHTML = `
-          <div class="track-number">${String(index + 1).padStart(2, '0')}</div>
-          <div class="track-main">
-            <button class="play-button" type="button" aria-label="Play ${escapeHTML(song.title)}">${playIcon()}</button>
-            <div class="track-info">
-              <div class="track-title">${escapeHTML(song.title)}</div>
-              <div class="track-meta"><span>${escapeHTML(song.year || '2026')}</span><span class="meta-dot">•</span><span>MP3</span></div>
-            </div>
-          </div>
-          <div class="track-end">
-            <span class="duration">${song.duration ? formatTime(song.duration) : '—:—'}</span>
-            <a class="download" href="${escapeHTML(song.url)}" download="${escapeHTML(song.title)}.mp3" title="Download ${escapeHTML(song.title)}" aria-label="Download ${escapeHTML(song.title)}">
-              <svg viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M5 20h14"></path></svg>
-            </a>
-          </div>
-          <div class="track-progress" aria-hidden="true"><div class="track-fill"></div></div>`;
-
-        track.addEventListener('click', event => {
-          if (event.target.closest('a')) return;
-          playSong(song);
-        });
-
-        track.addEventListener('keydown', event => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            playSong(song);
-          }
-        });
-
-        track.querySelector('.play-button').addEventListener('click', event => {
-          event.stopPropagation();
-          playSong(song);
-        });
-
-        track.querySelector('.track-progress').addEventListener('click', event => {
-          event.stopPropagation();
-          seekFrom(event, event.currentTarget);
-        });
-
-        list.appendChild(track);
-      });
-
-      updateTrackUI();
-    }
-
-    function updateTrackUI() {
-      document.querySelectorAll('.track').forEach(track => {
-        const active = currentSong && track.dataset.id === currentSong.id;
-        track.classList.toggle('active', Boolean(active));
-        const button = track.querySelector('.play-button');
-        if (button) setButtonIcon(button, Boolean(active && !audio.paused));
-      });
-      setButtonIcon(nowPlay, Boolean(currentSong && !audio.paused));
-    }
-
-    const placeholderArtwork = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.4v10.2a3.2 3.2 0 1 1-1.5-2.7V7.1l10-2.5v9.9a3.2 3.2 0 1 1-1.5-2.7V2.7L8.5 5.4Z"></path></svg>';
-
-    function setArtwork(song) {
-      nowArtwork.replaceChildren();
-      if (!song.artwork) {
-        nowArtwork.innerHTML = placeholderArtwork;
-        return;
-      }
-      const image = new Image();
-      image.alt = `${song.title} album artwork`;
-      image.src = song.artwork;
-      nowArtwork.appendChild(image);
-    }
-
-    function updateNowMeta(song) {
-      const details = [song.artist, song.album].filter(Boolean);
-      nowMeta.textContent = details.length
-        ? details.join('  •  ')
-        : `${song.year || '2026'}  •  MP3`;
-    }
-
-    function loadTagReader() {
-      if (window.jsmediatags) return Promise.resolve(window.jsmediatags);
-      if (tagsLoader) return tagsLoader;
-      tagsLoader = new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/jsmediatags@3.9.5/dist/jsmediatags.min.js';
-        script.onload = () => window.jsmediatags ? resolve(window.jsmediatags) : reject(new Error('Tag reader unavailable'));
-        script.onerror = reject;
-        document.head.appendChild(script);
-      });
-      return tagsLoader;
-    }
-
-    function loadSongMetadata(song) {
-      if (song.metadataLoaded || song.metadataLoading) return;
-      song.metadataLoading = true;
-
-      loadTagReader().then(reader => new Promise((resolve, reject) => {
-        reader.read(song.url, { onSuccess: resolve, onError: reject });
-      })).then(({ tags }) => {
-        song.metadataLoading = false;
-        song.metadataLoaded = true;
-        song.artist = tags.artist || '';
-        song.album = tags.album || '';
-        song.year = tags.year || song.year;
-
-        const picture = tags.picture;
-        if (picture && picture.data && picture.data.length) {
-          let binary = '';
-          for (let index = 0; index < picture.data.length; index += 0x8000) {
-            binary += String.fromCharCode(...picture.data.slice(index, index + 0x8000));
-          }
-          song.artwork = `data:${picture.format || 'image/jpeg'};base64,${btoa(binary)}`;
-        }
-
-        if (currentSong && currentSong.id === song.id) {
-          updateNowMeta(song);
-          setArtwork(song);
-        }
-      }).catch(() => {
-        song.metadataLoading = false;
-        song.metadataLoaded = true;
-        if (currentSong && currentSong.id === song.id) updateNowMeta(song);
-      });
-    }
-
-    function showNowPlaying(song) {
-      nowTitle.textContent = song.title;
-      updateNowMeta(song);
-      setArtwork(song);
-      nowDownload.href = song.url;
-      nowDownload.download = `${song.title}.mp3`;
-      nowPlaying.classList.add('visible');
-      nowCurrent.textContent = '0:00';
-      nowProgressFill.style.width = '0%';
-      nowTotal.textContent = song.duration ? formatTime(song.duration) : '—:—';
-      loadSongMetadata(song);
-    }
-
-    function playSong(song) {
-      if (currentSong && currentSong.id === song.id) {
-        if (audio.paused) audio.play().catch(() => setStatus('tap play to start', 'error'));
-        else audio.pause();
-        return;
-      }
-
-      currentSong = song;
-      audio.src = song.url;
-      audio.load();
-      showNowPlaying(song);
-      updateTrackUI();
-      setStatus('playing from archive');
-      audio.play().catch(() => setStatus('tap play to start', 'error'));
-    }
-
-    function seekFrom(event, element) {
-      if (!currentSong || !Number.isFinite(audio.duration)) return;
-      const rect = element.getBoundingClientRect();
-      const ratio = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
-      audio.currentTime = ratio * audio.duration;
-    }
-
-    function updateProgress() {
-      if (!currentSong || !Number.isFinite(audio.duration)) return;
-      const ratio = audio.currentTime / audio.duration;
-      nowProgressFill.style.width = `${ratio * 100}%`;
-      nowCurrent.textContent = formatTime(audio.currentTime);
-      nowTotal.textContent = formatTime(audio.duration);
-      nowProgressWrap.setAttribute('aria-valuenow', String(Math.round(ratio * 100)));
-      const track = [...document.querySelectorAll('.track')].find(item => item.dataset.id === currentSong.id);
-      if (track) track.querySelector('.track-fill').style.width = `${ratio * 100}%`;
-    }
-
-    function updateCurrentDuration() {
-      if (!currentSong || !Number.isFinite(audio.duration)) return;
-      currentSong.duration = audio.duration;
-      nowTotal.textContent = formatTime(audio.duration);
-      const track = [...document.querySelectorAll('.track')].find(item => item.dataset.id === currentSong.id);
-      if (track) track.querySelector('.duration').textContent = formatTime(audio.duration);
-    }
-
-    audio.addEventListener('loadedmetadata', updateCurrentDuration);
-    audio.addEventListener('timeupdate', updateProgress);
-    audio.addEventListener('play', updateTrackUI);
-    audio.addEventListener('pause', updateTrackUI);
-    audio.addEventListener('error', () => setStatus('could not play this file', 'error'));
-
-    audio.addEventListener('ended', () => {
-      if (!currentSong) return;
-      if (loopEnabled) {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-        return;
-      }
-      const currentPosition = songs.findIndex(song => song.id === currentSong.id);
-      const next = songs[currentPosition + 1];
-      if (next) playSong(next);
-      else {
-        audio.currentTime = 0;
-        updateProgress();
-        setStatus('archive complete');
-      }
-    });
-
-    function playAdjacent(direction) {
-      if (!currentSong) return;
-      if (direction < 0 && audio.currentTime > 3) {
-        audio.currentTime = 0;
-        return;
-      }
-      const currentPosition = songs.findIndex(song => song.id === currentSong.id);
-      const adjacent = songs[currentPosition + direction];
-      if (adjacent) playSong(adjacent);
-    }
-
-    nowPlay.addEventListener('click', () => {
-      if (!currentSong) return;
-      if (audio.paused) audio.play().catch(() => {});
-      else audio.pause();
-    });
-
-    previousButton.addEventListener('click', () => playAdjacent(-1));
-    nextButton.addEventListener('click', () => playAdjacent(1));
-
-    loopButton.addEventListener('click', () => {
-      loopEnabled = !loopEnabled;
-      loopButton.classList.toggle('is-active', loopEnabled);
-      loopButton.setAttribute('aria-pressed', String(loopEnabled));
-      loopButton.setAttribute('aria-label', loopEnabled ? 'Loop on' : 'Loop off');
-    });
-
-    volumeSlider.addEventListener('input', () => {
-      const value = Number(volumeSlider.value);
-      audio.muted = value === 0;
-      audio.volume = value;
-      if (value > 0) lastVolume = value;
-      volumeButton.setAttribute('aria-label', audio.muted ? 'Unmute' : 'Mute');
-    });
-
-    volumeButton.addEventListener('click', () => {
-      if (audio.muted || audio.volume === 0) {
-        audio.muted = false;
-        audio.volume = lastVolume || 0.85;
-        volumeSlider.value = String(audio.volume);
-        volumeButton.setAttribute('aria-label', 'Mute');
-      } else {
-        lastVolume = audio.volume;
-        audio.muted = true;
-        volumeSlider.value = '0';
-        volumeButton.setAttribute('aria-label', 'Unmute');
-      }
-    });
-
-    let isSeeking = false;
-    nowProgress.addEventListener('click', event => seekFrom(event, nowProgress));
-
-    nowProgress.addEventListener('pointerdown', event => {
-      if (!currentSong || !Number.isFinite(audio.duration)) return;
-      event.preventDefault();
-      isSeeking = true;
-      nowProgress.setPointerCapture?.(event.pointerId);
-      seekFrom(event, nowProgress);
-    });
-
-    nowProgress.addEventListener('pointermove', event => {
-      if (isSeeking) seekFrom(event, nowProgress);
-    });
-
-    nowProgress.addEventListener('pointerup', () => { isSeeking = false; });
-    nowProgress.addEventListener('pointercancel', () => { isSeeking = false; });
-
-    nowProgressWrap.addEventListener('keydown', event => {
-      if (!currentSong || !Number.isFinite(audio.duration)) return;
-      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        event.preventDefault();
-        audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + (event.key === 'ArrowRight' ? 5 : -5)));
-      }
-    });
-
-    searchInput.addEventListener('input', () => {
-      searchTerm = searchInput.value;
-      renderSongs();
-    });
-
-    clearSearch.addEventListener('click', () => {
-      searchInput.value = '';
-      searchTerm = '';
-      renderSongs();
-      searchInput.focus();
-    });
-
-    async function loadSongs() {
-      const cached = cachedSongs();
-      if (cached.length) {
-        songs = cached;
-        renderSongs();
-        setStatus('cached library');
-      }
-
-      try {
-        const response = await fetch(API_URL, {
-          headers: { Accept: 'application/vnd.github+json' },
-          cache: 'no-store'
-        });
-
-        if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
-
-        const files = await response.json();
-        if (!Array.isArray(files)) throw new Error('Unexpected GitHub response');
-
-        songs = files
-          .filter(file => file.type === 'file' && /\.mp3$/i.test(file.name))
-          .map(file => ({
-            id: file.sha || file.name,
-            title: file.name.replace(/\.mp3$/i, ''),
-            url: file.download_url || `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${SONGS_PATH}/${encodeURIComponent(file.name)}`,
-            year: '2026'
-          }))
-          .sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' }));
-
-        saveSongs(songs);
-        renderSongs();
-        setStatus('library updated');
-        footerText.textContent = `${songs.length} track${songs.length === 1 ? '' : 's'} · loaded from GitHub`;
-      } catch (error) {
-        console.error('Could not load songs:', error);
-        if (songs.length) {
-          setStatus('using cached library', 'error');
-          footerText.textContent = `${songs.length} cached track${songs.length === 1 ? '' : 's'} · GitHub is unavailable`;
-        } else {
-          setStatus('library unavailable', 'error');
-          list.innerHTML = '<div class="empty"><strong>Could not load the library</strong>Check your connection and refresh the page.</div>';
-        }
-      }
-    }
-
-    loadSongs();
-  </script>
+    <!-- More about -->
+    <div class="section" style="margin-top: 28px;">
+      <h2>what i do</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px;">
+        <div>
+          <strong style="display:block; margin-bottom:4px; color:var(--accent-2);">Music Archive</strong>
+          <span style="color:var(--muted); font-size:14.5px;">I maintain a personal collection of over 300 tracks with detailed metadata, artwork, and listening notes.</span>
+        </div>
+        <div>
+          <strong style="display:block; margin-bottom:4px; color:var(--accent-2);">Digital Spaces</strong>
+          <span style="color:var(--muted); font-size:14.5px;">I build clean, focused websites and tools — mostly for music, productivity, and creative exploration.</span>
+        </div>
+        <div>
+          <strong style="display:block; margin-bottom:4px; color:var(--accent-2);">Sound Discovery</strong>
+          <span style="color:var(--muted); font-size:14.5px;">I spend hours digging through Bandcamp, SoundCloud, and private discords for music that hits different.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top: 28px;">
+      <h2>elsewhere</h2>
+      <div class="links">
+        <a href="https://guns.lol/preference" target="_blank" class="link-card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span class="label">guns.lol / preference</span>
+        </a>
+        <a href="https://guns.lol/portforward" target="_blank" class="link-card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span class="label">guns.lol / portforward</span>
+        </a>
+        <a href="https://guns.lol/elijah8walker" target="_blank" class="link-card">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <span class="label">guns.lol / elijah8walker</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>built with care by exo</span>
+      <span>© 2026</span>
+    </div>
+  </main>
 </body>
 </html>
